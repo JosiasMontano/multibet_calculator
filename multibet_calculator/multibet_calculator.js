@@ -62,3 +62,47 @@ win3m1.onclick = () => aumento(winer);
 win3m2.onclick = () => aumento(winer);
 win3m1m.onclick = () => aumento(onemap);
 win3m2m.onclick = () => aumento(onemap);
+
+reset.onclick = () => resetear();
+ 
+
+
+function aumento(valor){
+  total=total*valor;
+  const porcentaje=(total*100);
+  porcentajeAFraccion(porcentaje);
+  textElement.textContent="La probabilidad de que ganes es del: "+porcentaje+"%";   
+}
+
+
+
+function porcentajeAFraccion(porcentaje) {
+  const decimal = porcentaje / 100;
+  
+  let numerador = decimal * 100;
+  let denominador = 100;
+  
+  function calcularMCD(a, b) {
+    return b === 0 ? a : calcularMCD(b, a % b);
+  }
+  
+  const mcd = calcularMCD(numerador, denominador);
+  numerador = numerador / mcd;
+  denominador = denominador / mcd;
+  
+  numerador = Math.round(numerador);
+  denominador = Math.round(denominador);
+  
+    textElement1.textContent="La posibilidad es de "+ numerador+" entre "+ denominador ;   
+
+  return { numerador, denominador };
+}
+
+function resetear(){
+    textElement.textContent="Apuesta y calcula las probabilidades de ganar";
+    textElement1.textContent="";
+    total=1;
+}
+
+
+
